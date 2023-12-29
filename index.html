@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="Javascript/script.js"></script>
+    <title>Secret Santa</title>
+</head>
+
+<body>
+    <h1> Enter the names of your participants </h1>
+    <form action="main.php" method="post">
+        <!-- Your existing form fields here -->
+
+        <br>
+        <h2>Participants:</h2>
+        <div id="participantsContainer">
+            <!-- Area for participant fields -->
+        </div>
+        <button id="addParticipantButton" type="button">Add a participant</button>
+        <button id="removeParticipantButton" type="button">Remove the last participant</button>
+        <br>
+        <br>
+
+        <!-- ... other form fields ... -->
+
+        <button type="reset">Cancel</button>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            let participantCounter = 1;
+
+            // Function to add a participant
+            function addParticipant() {
+                let participantHtml =
+                    '<div class="form-group">' +
+                    '<label for="participantName' + participantCounter + '">Participant Name ' + participantCounter + '</label>' +
+                    '<input type="text" class="form-control participant-input" name="participantName' + participantCounter + '" placeholder="Participant Name ' + participantCounter + '">' +
+                    '<label for="participantEmail' + participantCounter + '">Participant Email ' + participantCounter + '</label>' +
+                    '<input type="email" class="form-control participant-input" name="participantEmail' + participantCounter + '" placeholder="Participant Email ' + participantCounter + '">' +
+                    '</div>';
+
+                $("#participantsContainer").append(participantHtml);
+                participantCounter++;
+                // Update the hidden field totalParticipants
+                $("#totalParticipants").val(participantCounter - 1);
+            }
+
+            // Initialize the add participant button
+            $("#addParticipantButton").button().click(function () {
+                addParticipant();
+            });
+
+            // Handle the removal of the last participant
+            $("#removeParticipantButton").button().click(function () {
+                if (participantCounter > 1) {
+                    participantCounter--;
+                    $("#participantsContainer .form-group:last").remove();
+                    // Update the hidden field totalParticipants
+                    $("#totalParticipants").val(participantCounter - 1);
+                }
+            });
+        });
+    </script>
+</body>
+<style>
+    body {
+        background-color: #0D1117;
+        color: #C9D1D9;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .participant-input {
+        width: 300px; /* Adjust the width as needed */
+    }
+
+    input {
+        background-color: #1E2328;
+    }
+</style>
+</html>
