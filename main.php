@@ -74,7 +74,6 @@
 
                 // Generate a random rotation of participants and emails
                 $participants = rotateArray($participants);
-                $participantEmails = rotateArray($participantEmails); // Rotate email array accordingly
 
                 // Create pairs
                 $resultat = array();
