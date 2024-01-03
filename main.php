@@ -68,8 +68,8 @@
                 // Function to generate a random rotation of an array
                 function rotateArray($array)
                 {
-                    $index = rand(0, count($array) - 1);
-                    return array_merge(array_slice($array, $index), array_slice($array, 0, $index));
+                    shuffle($array);
+                    return $array;
                 }
 
                 // Generate a random rotation of participants and emails
